@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kettle & Crumb — Artisanal Order Command & Allergy Guard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Theme Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        studio: {
+                            bg: '#161519',
+                            card: '#222026',
+                            border: '#33303A',
+                            hover: '#2D2A33',
+                        },
+                        terracotta: {
+                            400: '#EE8F77',
+                            500: '#E07A5F',
+                            600: '#C86147',
+                        },
+                        amber: {
+                            300: '#FCD34D',
+                            400: '#F4A261',
+                            500: '#E76F51',
+                        },
+                        crimson: {
+                            500: '#EF233C',
+                            600: '#D90429',
+                            900: '#5C000E',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar styling for editorial dark look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #161519;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33303A;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #E07A5F;
+        }
+
+        /* Pulsing border animation for emergency allergy warning */
+        @keyframes crimsonGlow {
+            0%, 100% { box-shadow: 0 0 0 1px #D90429, 0 0 15px rgba(217, 4, 41, 0.35); }
+            50% { box-shadow: 0 0 0 2px #EF233C, 0 0 25px rgba(239, 35, 60, 0.6); }
+        }
+        .allergy-critical-glow {
+            animation: crimsonGlow 2.2s infinite ease-in-out;
+        }
+
+        /* Grain texture background overlay */
+        .bg-grain {
+            background-image: radial-gradient(rgba(224, 122, 95, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-studio-bg text-slate-200 font-sans antialiased min-h-screen flex flex-col bg-grain">
+
+    <!-- APP HEADER BAR -->
+    <header class="border-b border-studio-border bg-studio-bg/90 backdrop-blur sticky top-0 z-30 px-4 lg:px-8 py-3.5">
+        <div class="max-w-[1600px] mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-terracotta-500 to-amber-400 flex items-center justify-center text-studio-bg font-serif font-bold text-2xl shadow-lg">
+                    &amp;
+                </div>
+                <div>
+                    <h1 class="font-serif text-2xl font-semibold text-slate-100 tracking-wide flex items-center gap-2">
+                        Kettle &amp; Crumb
+                        <span class="text-[10px] font-sans font-semibold tracking-widest uppercase bg-terracotta-500/20 text-terracotta-400 border border-terracotta-500/30 px-2 py-0.5 rounded-md">Artisanal Studio</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Unified Order Book &amp; Allergen Control System</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="hidden sm:flex items-center space-x-3 bg-studio-card border border-studio-border px-3.5 py-1.5 rounded-lg text-xs">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="text-slate-400">Channels:</span>
+                    <span class="text-amber-400 font-medium">WhatsApp &bull; Instagram &bull; Email &bull; Phone</span>
+                </div>
+                <button onclick="quickPopulateFuneralTest()" class="bg-crimson-600/20 hover:bg-crimson-600/30 border border-crimson-500/40 text-crimson-500 text-xs px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-flask text-crimson-500"></i>
+                    <span>Simulate Cold Test</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN DUAL-PANEL LAYOUT CONTAINER -->
+    <main class="max-w-[1600px] mx-auto w-full px-4 lg:px-8 py-6 flex-grow grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- LEFT PANEL: NEW ORDER INTAKE FORM (4 COLS) -->
+        <section class="lg:col-span-5 xl:col-span-4 bg-studio-card border border-studio-border rounded-2xl p-5 shadow-2xl flex flex-col justify-between h-fit sticky top-20">
+            <div>
+                <div class="border-b border-studio-border pb-4 mb-5 flex items-center justify-between">
+                    <div>
+                        <h2 class="font-serif text-2xl font-bold text-slate-100 flex items-center gap-2">
+                            <i class="fa-solid fa-pen-nib text-terracotta-500 text-lg"></i>
+                            Order Intake
+                        </h2>
+                        <p class="text-xs text-slate-400">Log incoming client requests instantly</p>
+                    </div>
+                    <span class="text-[11px] bg-studio-bg border border-studio-border text-amber-400 font-mono px-2.5 py-1 rounded-md" id="next-order-id-display">KC-2026-005</span>
+                </div>
+
+                <form id="intake-form" onsubmit="handleOrderSubmission(event)" class="space-y-4">
+                    
+                    <!-- Channel Selector Radio Cards -->
+                    <div>
+                        <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
+                            Source Channel <span class="text-crimson-500">*</span>
+                        </label>
+                        <div class="grid grid-cols-4 gap-2">
+                            <label class="cursor-pointer border border-studio-border bg-studio-bg rounded-xl p-2.5 text-center hover:border-emerald-500/50 transition has-[:checked]:bg-emerald-500/10 has-[:checked]:border-emerald-500">
+                                <input type="radio" name="channel" value="WhatsApp" checked class="hidden">
+                                <i class="fa-brands fa-whatsapp text-emerald-400 text-lg block mb-0.5"></i>
+                                <span class="text-[10px] font-semibold text-slate-300 block">WhatsApp</span>
+                            </label>
+                            <label class="cursor-pointer border border-studio-border bg-studio-bg rounded-xl p-2.5 text-center hover:border-pink-500/50 transition has-[:checked]:bg-pink-500/10 has-[:checked]:border-pink-500">
+                                <input type="radio" name="channel" value="Instagram" class="hidden">
+                                <i class="fa-brands fa-instagram text-pink-400 text-lg block mb-0.5"></i>
+                                <span class="text-[10px] font-semibold text-slate-300 block">Instagram</span>
+                            </label>
+                            <label class="cursor-pointer border border-studio-border bg-studio-bg rounded-xl p-2.5 text-center hover:border-red-500/50 transition has-[:checked]:bg-red-500/10 has-[:checked]:border-red-500">
+                                <input type="radio" name="channel" value="Email" class="hidden">
+                                <i class="fa-solid fa-envelope text-red-400 text-lg block mb-0.5"></i>
+                                <span class="text-[10px] font-semibold text-slate-300 block">Email</span>
+                            </label>
+                            <label class="cursor-pointer border border-studio-border bg-studio-bg rounded-xl p-2.5 text-center hover:border-blue-500/50 transition has-[:checked]:bg-blue-500/10 has-[:checked]:border-blue-500">
+                                <input type="radio" name="channel" value="Phone" class="hidden">
+                                <i class="fa-solid fa-phone text-blue-400 text-lg block mb-0.5"></i>
+                                <span class="text-[10px] font-semibold text-slate-300 block">Phone</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- PROMINENT ALLERGY & DIETARY NOTICE BOX (ALWAYS AT THE FRONT) -->
+                    <div id="form-allergy-box" class="bg-crimson-900/30 border-2 border-crimson-600/70 rounded-xl p-3.5 space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <label for="form-allergies" class="text-xs font-bold text-crimson-500 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fa-solid fa-triangle-exclamation text-crimson-500"></i>
+                                Dietary & Allergy Guard (Mandatory Check)
+                            </label>
+                            <span class="text-[10px] bg-crimson-600 text-white font-bold px-1.5 py-0.5 rounded">FRONT &amp; CENTER</span>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-snug">
+                            Record any known allergies (e.g. Nut, Gluten, Dairy). Enter "None" if confirmed safe.
+                        </p>
+                        <textarea id="form-allergies" rows="2" oninput="toggleFormAllergyHighlight()" placeholder="e.g. SEVERE PEANUT / NUT ALLERGY - ZERO CROSS CONTAMINATION" class="w-full bg-studio-bg border border-crimson-500/50 text-crimson-400 font-bold placeholder-crimson-500/40 text-xs rounded-lg p-2.5 focus:outline-none focus:ring-2 focus:ring-crimson-500"></textarea>
+
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <button type="button" onclick="setQuickAllergy('Severe Nut / Peanut Allergy')" class="text-[10px] bg-crimson-500/20 hover:bg-crimson-500/40 text-crimson-300 border border-crimson-500/40 px-2 py-0.5 rounded font-medium">
+                                + Nut Allergy
+                            </button>
+                            <button type="button" onclick="setQuickAllergy('Celiac / Gluten Free')" class="text-[10px] bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded font-medium">
+                                + Celiac
+                            </button>
+                            <button type="button" onclick="setQuickAllergy('Lactose / Dairy Free')" class="text-[10px] bg-amber-500/20 hover:bg-amber-500/40 text-amber-300 border border-amber-500/40 px-2 py-0.5 rounded font-medium">
+                                + Dairy Free
+                            </button>
+                            <button type="button" onclick="setQuickAllergy('None')" class="text-[10px] bg-studio-bg hover:bg-studio-hover text-slate-400 border border-studio-border px-2 py-0.5 rounded font-medium">
+                                Clear
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Client & Contact Info -->
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Customer Name <span class="text-crimson-500">*</span></label>
+                            <input type="text" id="form-customer" required placeholder="e.g. Aoife Higgins" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Contact Details <span class="text-crimson-500">*</span></label>
+                            <input type="text" id="form-contact" required placeholder="Phone / Email / @handle" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                    </div>
+
+                    <!-- Event Category & Items -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Category <span class="text-crimson-500">*</span></label>
+                            <select id="form-category" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                                <option value="Funeral Gathering">Funeral Gathering</option>
+                                <option value="Event Catering">Event Catering</option>
+                                <option value="Artisan Bakery Batch">Artisan Bakery Batch</option>
+                                <option value="Bespoke Cake">Bespoke Cake</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Items Requested <span class="text-crimson-500">*</span></label>
+                            <input type="text" id="form-items" required placeholder="e.g. 40x Sandwich Platters, Scones, Tea Service" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                    </div>
+
+                    <!-- Date, Time & Cost -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Fulfillment Date <span class="text-crimson-500">*</span></label>
+                            <input type="date" id="form-date" required class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Time</label>
+                            <input type="time" id="form-time" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-semibold text-slate-300 mb-1">Value (€) <span class="text-crimson-500">*</span></label>
+                            <input type="number" id="form-amount" step="0.01" required placeholder="550.00" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-300 mb-1">Additional Context / Venue Notes</label>
+                        <input type="text" id="form-notes" placeholder="e.g. Deliver to side hall entrance before 11:00 AM" class="w-full bg-studio-bg border border-studio-border text-xs rounded-lg p-2.5 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-terracotta-500 to-amber-400 text-studio-bg font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg hover:opacity-95 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-base"></i>
+                        <span>Commit Order To Book</span>
+                    </button>
+
+                </form>
+            </div>
+        </section>
+
+
+        <!-- RIGHT PANEL: LIVE ORDERS & ALLERGY RISK STREAM (7-8 COLS) -->
+        <section class="lg:col-span-7 xl:col-span-8 space-y-5">
+
+            <!-- ALLERGY RISK MATRIX BANNER -->
+            <div class="bg-gradient-to-r from-crimson-900/60 via-studio-card to-studio-card border-2 border-crimson-600 rounded-2xl p-4 shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div class="flex items-start space-x-3.5">
+                    <div class="p-3 bg-crimson-600 text-white rounded-xl shadow-md mt-0.5">
+                        <i class="fa-solid fa-shield-halved text-2xl animate-pulse"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-serif text-xl font-bold text-slate-100">Zero-Tolerance Allergen Watch</h3>
+                            <span class="text-[10px] bg-crimson-600 text-white font-bold px-2 py-0.5 rounded-full" id="critical-badge-count">0 HIGH RISK</span>
+                        </div>
+                        <p class="text-xs text-slate-300 mt-0.5">
+                            Orders tagged with severe dietary restrictions require kitchen safety sign-off before packaging or dispatch.
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 self-end md:self-auto">
+                    <button onclick="filterAllergiesOnly()" class="bg-crimson-600 hover:bg-crimson-500 text-white text-xs px-3.5 py-2 rounded-xl font-bold transition flex items-center gap-2 shadow-lg">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Isolate Allergy Orders</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- FILTER & SEARCH CONTROL TOOLBAR -->
+            <div class="bg-studio-card border border-studio-border rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Channel Filter Badges -->
+                <div class="flex flex-wrap items-center gap-1.5 w-full md:w-auto" id="channel-tabs">
+                    <button onclick="setFilter('ALL')" data-filter="ALL" class="filter-tab active text-xs font-semibold px-3 py-1.5 rounded-lg bg-terracotta-500 text-studio-bg transition">
+                        All (<span id="cnt-all">0</span>)
+                    </button>
+                    <button onclick="setFilter('WhatsApp')" data-filter="WhatsApp" class="filter-tab text-xs font-semibold px-3 py-1.5 rounded-lg bg-studio-bg text-slate-300 border border-studio-border hover:bg-studio-hover transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp (<span id="cnt-whatsapp">0</span>)
+                    </button>
+                    <button onclick="setFilter('Instagram')" data-filter="Instagram" class="filter-tab text-xs font-semibold px-3 py-1.5 rounded-lg bg-studio-bg text-slate-300 border border-studio-border hover:bg-studio-hover transition flex items-center gap-1.5">
+                        <i class="fa-brands fa-instagram text-pink-400"></i> Instagram (<span id="cnt-instagram">0</span>)
+                    </button>
+                    <button onclick="setFilter('Email')" data-filter="Email" class="filter-tab text-xs font-semibold px-3 py-1.5 rounded-lg bg-studio-bg text-slate-300 border border-studio-border hover:bg-studio-hover transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-envelope text-red-400"></i> Email (<span id="cnt-email">0</span>)
+                    </button>
+                    <button onclick="setFilter('Phone')" data-filter="Phone" class="filter-tab text-xs font-semibold px-3 py-1.5 rounded-lg bg-studio-bg text-slate-300 border border-studio-border hover:bg-studio-hover transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-phone text-blue-400"></i> Phone (<span id="cnt-phone">0</span>)
+                    </button>
+                </div>
+
+                <!-- Search Input Bar -->
+                <div class="relative w-full md:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+                    <input type="text" id="search-bar" onkeyup="renderOrders()" placeholder="Search order, allergen, client..." class="w-full bg-studio-bg border border-studio-border text-xs rounded-xl pl-9 pr-3 py-2 text-slate-100 focus:outline-none focus:border-terracotta-500">
+                </div>
+
+            </div>
+
+            <!-- LIVE ORDERS FEED CONTAINER -->
+            <div id="orders-feed" class="space-y-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+
+            <!-- Empty State View -->
+            <div id="empty-state" class="hidden text-center py-16 bg-studio-card border border-dashed border-studio-border rounded-2xl">
+                <i class="fa-solid fa-clipboard-list text-4xl text-slate-600 mb-3"></i>
+                <h3 class="text-base font-semibold text-slate-300">No active orders found</h3>
+                <p class="text-xs text-slate-500 mt-1">Try clearing your search query or channel filter.</p>
+                <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-studio-bg border border-studio-border text-amber-400 text-xs font-semibold rounded-lg hover:bg-studio-hover">Reset Filters</button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-studio-border bg-studio-bg py-4 mt-8 text-xs text-slate-500 text-center">
+        <div class="max-w-[1600px] mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-2">
+            <span><strong>Kettle &amp; Crumb</strong> — Internal Order Book Alpha System (€18k Build Strategy)</span>
+            <div class="flex items-center space-x-4">
+                <button onclick="exportJSON()" class="hover:text-slate-300 transition flex items-center gap-1">
+                    <i class="fa-solid fa-download"></i> Export Data (JSON)
+                </button>
+                <button onclick="resetDefaults()" class="text-crimson-500 hover:text-crimson-400 transition flex items-center gap-1">
+                    <i class="fa-solid fa-rotate"></i> Reset All Data
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT LOGIC -->
+    <script>
+        // Initializing default orders including mandatory Funeral / Nut Allergy cold test case
+        const DEFAULT_ORDERS = [
+            {
+                id: "KC-2026-001",
+                channel: "WhatsApp",
+                customer: "Aoife Higgins",
+                contact: "+353 87 912 4011",
+                category: "Funeral Gathering",
+                items: "Funeral Catering Package — 40 Guests (Artisan Sandwich Trays, Fresh Scones, Tea & Coffee Service)",
+                amount: 580.00,
+                date: "2026-10-15",
+                time: "10:30",
+                allergies: "CRITICAL NUT ALLERGY (PEANUTS & TREE NUTS). ZERO CROSS-CONTAMINATION. MUST BE PREPARED IN CLEANROOM BAKE ZONE.",
+                notes: "Deliver directly to Parish Center side entrance.",
+                verified: false,
+                status: "Pending Kitchen Audit"
+            },
+            {
+                id: "KC-2026-002",
+                channel: "Instagram",
+                customer: "Ciarán Ó'Se",
+                contact: "@ciaran_bakery_fan",
+                category: "Artisan Bakery Batch",
+                items: "Sourdough Boules (x10), Almond Croissants (x15), Cardamom Buns (x15)",
+                amount: 140.00,
+                date: "2026-10-13",
+                time: "08:15",
+                allergies: "Contains Almonds/Nuts (Expected in pastries)",
+                notes: "Morning market pickup.",
+                verified: true,
+                status: "In Preparation"
+            },
+            {
+                id: "KC-2026-003",
+                channel: "Email",
+                customer: "Dr. Evelyn Vance",
+                contact: "e.vance@trinity-events.ie",
+                category: "Event Catering",
+                items: "Faculty Reception Platters — Gourmet Savory Tartlets & Canapés (60 pax)",
+                amount: 720.00,
+                date: "2026-10-18",
+                time: "16:00",
+                allergies: "2x Celiac / Strict Gluten Free Platters required",
+                notes: "Invoice through corporate accounts.",
+                verified: true,
+                status: "Confirmed"
+            },
+            {
+                id: "KC-2026-004",
+                channel: "Phone",
+                customer: "Sean McCarthy",
+                contact: "+353 86 554 2210",
+                category: "Bespoke Cake",
+                items: "3-Tier Spiced Fig & Honey Wedding Anniversary Cake",
+                amount: 310.00,
+                date: "2026-10-20",
+                time: "14:00",
+                allergies: "None",
+                notes: "Inscribe 'Happy 30th Anniversary Sean & Mary'",
+                verified: true,
+                status: "Confirmed"
+            }
+        ];
+
+        let orders = [];
+        let activeFilter = 'ALL';
+        let filterAllergyOnlyState = false;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadState();
+            renderOrders();
+            updateCounters();
+            setTodayDefaultDate();
+        });
+
+        function loadState() {
+            const saved = localStorage.getItem("kc_artisanal_orders_v2");
+            if (saved) {
+                try { orders = JSON.parse(saved); } 
+                catch (e) { orders = [...DEFAULT_ORDERS]; }
+            } else {
+                orders = [...DEFAULT_ORDERS];
+                saveState();
+            }
+        }
+
+        function saveState() {
+            localStorage.setItem("kc_artisanal_orders_v2", JSON.stringify(orders));
+        }
+
+        function setTodayDefaultDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('form-date').value = today;
+        }
+
+        function isHighRiskAllergy(text) {
+            if (!text) return false;
+            const cleaned = text.trim().toLowerCase();
+            return cleaned !== "" && cleaned !== "none" && cleaned !== "n/a" && cleaned !== "no";
+        }
+
+        function getChannelBadgeHtml(channel) {
+            switch(channel) {
+                case 'WhatsApp':
+                    return `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-xs px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1.5">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i> WhatsApp
+                    </span>`;
+                case 'Instagram':
+                    return `<span class="bg-pink-500/10 text-pink-400 border border-pink-500/30 text-xs px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1.5">
+                        <i class="fa-brands fa-instagram text-pink-400"></i> Instagram
+                    </span>`;
+                case 'Email':
+                    return `<span class="bg-red-500/10 text-red-400 border border-red-500/30 text-xs px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-envelope text-red-400"></i> Email
+                    </span>`;
+                case 'Phone':
+                    return `<span class="bg-blue-500/10 text-blue-400 border border-blue-500/30 text-xs px-2.5 py-1 rounded-lg font-semibold flex items-center gap-1.5">
+                        <i class="fa-solid fa-phone text-blue-400"></i> Phone
+                    </span>`;
+                default:
+                    return `<span class="bg-studio-bg text-slate-300 text-xs px-2 py-1 rounded-lg">${channel}</span>`;
+            }
+        }
+
+        function renderOrders() {
+            const container = document.getElementById('orders-feed');
+            const emptyState = document.getElementById('empty-state');
+            const query = document.getElementById('search-bar').value.toLowerCase().trim();
+
+            const filtered = orders.filter(o => {
+                if (activeFilter !== 'ALL' && o.channel !== activeFilter) return false;
+                if (filterAllergyOnlyState && !isHighRiskAllergy(o.allergies)) return false;
+                if (query) {
+                    const searchStr = `${o.id} ${o.customer} ${o.items} ${o.allergies} ${o.category}`.toLowerCase();
+                    if (!searchStr.includes(query)) return false;
+                }
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            container.innerHTML = filtered.map(order => {
+                const hasAllergy = isHighRiskAllergy(order.allergies);
+                const allergyBoxStyle = hasAllergy 
+                    ? 'allergy-critical-glow border-2 border-crimson-600 bg-studio-card' 
+                    : 'border border-studio-border bg-studio-card hover:border-studio-hover';
+
+                return `
+                    <div class="rounded-2xl p-5 transition shadow-lg ${allergyBoxStyle}">
+                        
+                        <!-- Top Bar: Channel Tag, ID, Date & Amount -->
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-studio-border">
+                            <div class="flex items-center space-x-2.5">
+                                ${getChannelBadgeHtml(order.channel)}
+                                <span class="font-mono text-xs text-amber-400 font-bold">${order.id}</span>
+                                <span class="text-[11px] bg-studio-bg text-slate-400 border border-studio-border px-2 py-0.5 rounded">${order.category}</span>
+                            </div>
+                            <div class="flex items-center justify-between sm:justify-end gap-4">
+                                <span class="text-xs text-slate-400 font-mono">
+                                    <i class="fa-regular fa-calendar text-slate-500 mr-1"></i>${order.date} ${order.time ? '@ ' + order.time : ''}
+                                </span>
+                                <span class="font-serif text-xl font-bold text-slate-100">€${parseFloat(order.amount).toFixed(2)}</span>
+                            </div>
+                        </div>
+
+                        <!-- Customer & Items Description -->
+                        <div class="mt-3.5 grid grid-cols-1 lg:grid-cols-12 gap-4">
+                            
+                            <!-- Left: Client info & Items -->
+                            <div class="lg:col-span-7 space-y-1.5">
+                                <div class="flex items-center space-x-2">
+                                    <h4 class="font-bold text-slate-100 text-sm">${escapeHtml(order.customer)}</h4>
+                                    <span class="text-xs text-slate-400 font-mono">(${escapeHtml(order.contact)})</span>
+                                </div>
+                                <p class="text-xs text-slate-300 font-medium leading-relaxed">${escapeHtml(order.items)}</p>
+                                ${order.notes ? `<p class="text-[11px] text-slate-400 italic"><span class="font-semibold text-slate-500">Note:</span> ${escapeHtml(order.notes)}</p>` : ''}
+                            </div>
+
+                            <!-- Right: IMPOSSIBLE-TO-MISS ALLERGY NOTICE -->
+                            <div class="lg:col-span-5 flex flex-col justify-between">
+                                ${hasAllergy ? `
+                                    <div class="bg-crimson-900/40 border border-crimson-600 rounded-xl p-3">
+                                        <div class="flex items-center justify-between text-[10px] font-bold text-crimson-400 uppercase tracking-wider mb-1">
+                                            <span class="flex items-center gap-1">
+                                                <i class="fa-solid fa-triangle-exclamation text-crimson-500"></i> High-Risk Allergen Warning
+                                            </span>
+                                            <span class="bg-crimson-600 text-white px-1.5 py-0.2 rounded font-black">ACTION REQUIRED</span>
+                                        </div>
+                                        <p class="text-xs font-bold text-slate-100 leading-snug">
+                                            ${escapeHtml(order.allergies)}
+                                        </p>
+                                        <div class="mt-2.5 pt-2 border-t border-crimson-600/40 flex items-center justify-between">
+                                            <label class="cursor-pointer flex items-center space-x-1.5">
+                                                <input type="checkbox" onchange="toggleSafetyVerification('${order.id}')" ${order.verified ? 'checked' : ''} class="w-3.5 h-3.5 rounded text-crimson-600 focus:ring-crimson-500">
+                                                <span class="text-[10px] font-bold text-slate-300">Kitchen Safety Audit Verified</span>
+                                            </label>
+                                            <button onclick="deleteOrder('${order.id}')" class="text-slate-500 hover:text-crimson-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+                                        </div>
+                                    </div>
+                                ` : `
+                                    <div class="bg-studio-bg border border-studio-border rounded-xl p-3 flex flex-col justify-between h-full">
+                                        <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                                            <span>No critical dietary warnings logged.</span>
+                                        </div>
+                                        <div class="text-right mt-2">
+                                            <button onclick="deleteOrder('${order.id}')" class="text-slate-500 hover:text-crimson-400 text-xs"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                                        </div>
+                                    </div>
+                                `}
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function handleOrderSubmission(e) {
+            e.preventDefault();
+
+            const allergyVal = document.getElementById('form-allergies').value;
+            const channelVal = document.querySelector('input[name="channel"]:checked').value;
+
+            const newId = `KC-2026-${String(orders.length + 1).padStart(3, '0')}`;
+
+            const newOrder = {
+                id: newId,
+                channel: channelVal,
+                customer: document.getElementById('form-customer').value,
+                contact: document.getElementById('form-contact').value,
+                category: document.getElementById('form-category').value,
+                items: document.getElementById('form-items').value,
+                date: document.getElementById('form-date').value,
+                time: document.getElementById('form-time').value,
+                amount: parseFloat(document.getElementById('form-amount').value || 0),
+                allergies: allergyVal,
+                notes: document.getElementById('form-notes').value,
+                verified: false,
+                status: isHighRiskAllergy(allergyVal) ? "Pending Kitchen Audit" : "Confirmed"
+            };
+
+            orders.unshift(newOrder);
+            saveState();
+            renderOrders();
+            updateCounters();
+
+            // Reset Form
+            document.getElementById('intake-form').reset();
+            setTodayDefaultDate();
+            toggleFormAllergyHighlight();
+        }
+
+        function toggleSafetyVerification(id) {
+            const order = orders.find(o => o.id === id);
+            if (order) {
+                order.verified = !order.verified;
+                saveState();
+                renderOrders();
+            }
+        }
+
+        function setQuickAllergy(text) {
+            const field = document.getElementById('form-allergies');
+            if (text === 'None') {
+                field.value = 'None';
+            } else {
+                if (!field.value || field.value === 'None') field.value = text;
+                else field.value += `, ${text}`;
+            }
+            toggleFormAllergyHighlight();
+        }
+
+        function toggleFormAllergyHighlight() {
+            const val = document.getElementById('form-allergies').value;
+            const box = document.getElementById('form-allergy-box');
+            if (isHighRiskAllergy(val)) {
+                box.classList.add('bg-crimson-900/60', 'border-crimson-500');
+            } else {
+                box.classList.remove('bg-crimson-900/60', 'border-crimson-500');
+            }
+        }
+
+        function setFilter(channel) {
+            activeFilter = channel;
+            filterAllergyOnlyState = false;
+
+            document.querySelectorAll('#channel-tabs .filter-tab').forEach(btn => {
+                if (btn.getAttribute('data-filter') === channel) {
+                    btn.classList.add('bg-terracotta-500', 'text-studio-bg');
+                    btn.classList.remove('bg-studio-bg', 'text-slate-300');
+                } else {
+                    btn.classList.remove('bg-terracotta-500', 'text-studio-bg');
+                    btn.classList.add('bg-studio-bg', 'text-slate-300');
+                }
+            });
+
+            renderOrders();
+        }
+
+        function filterAllergiesOnly() {
+            filterAllergyOnlyState = true;
+            renderOrders();
+        }
+
+        function resetFilters() {
+            activeFilter = 'ALL';
+            filterAllergyOnlyState = false;
+            document.getElementById('search-bar').value = '';
+            setFilter('ALL');
+        }
+
+        function updateCounters() {
+            const highRiskCount = orders.filter(o => isHighRiskAllergy(o.allergies)).length;
+            document.getElementById('critical-badge-count').innerText = `${highRiskCount} HIGH RISK`;
+
+            document.getElementById('cnt-all').innerText = orders.length;
+            document.getElementById('cnt-whatsapp').innerText = orders.filter(o => o.channel === 'WhatsApp').length;
+            document.getElementById('cnt-instagram').innerText = orders.filter(o => o.channel === 'Instagram').length;
+            document.getElementById('cnt-email').innerText = orders.filter(o => o.channel === 'Email').length;
+            document.getElementById('cnt-phone').innerText = orders.filter(o => o.channel === 'Phone').length;
+
+            const nextIdNum = orders.length + 1;
+            document.getElementById('next-order-id-display').innerText = `KC-2026-${String(nextIdNum).padStart(3, '0')}`;
+        }
+
+        // SIMULATE COLD TEST (FOR CLASSROOM DEMO)
+        function quickPopulateFuneralTest() {
+            document.getElementById('form-customer').value = "Siobhán O'Donnell";
+            document.getElementById('form-contact').value = "+353 87 601 9920";
+            document.getElementById('form-category').value = "Funeral Gathering";
+            document.getElementById('form-items').value = "Funeral Gathering Catering — 50 Pax (Artisan Finger Sandwiches, Scones, Tea Service)";
+            document.getElementById('form-amount').value = "650.00";
+            document.getElementById('form-allergies').value = "CRITICAL NUT ALLERGY (PEANUTS). SEVERE ANAPHYLAXIS RISK.";
+            document.getElementById('form-notes').value = "Simulated cold test order for nut allergy protocol verification.";
+            
+            toggleFormAllergyHighlight();
+        }
+
+        function deleteOrder(id) {
+            orders = orders.filter(o => o.id !== id);
+            saveState();
+            renderOrders();
+            updateCounters();
+        }
+
+        function resetDefaults() {
+            if (confirm("Reset order book to demo initial state?")) {
+                orders = [...DEFAULT_ORDERS];
+                saveState();
+                renderOrders();
+                updateCounters();
+            }
+        }
+
+        function exportJSON() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(orders, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", `kettle_crumb_orders_${new Date().toISOString().split('T')[0]}.json`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
